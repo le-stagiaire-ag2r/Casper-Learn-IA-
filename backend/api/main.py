@@ -40,10 +40,11 @@ app.add_middleware(
 rag_engine: Optional[CasperRAG] = None
 
 
-# Modèles Pydantic
+# Pydantic Models
 class QuestionRequest(BaseModel):
-    question: str = Field(..., description="Question de l'utilisateur", min_length=1)
-    n_context: int = Field(5, description="Nombre de contextes à récupérer", ge=1, le=10)
+    question: str = Field(..., description="User's question", min_length=1)
+    language: str = Field("en", description="Language code (en, fr, es, de, it, pt, cn, jp, kr)")
+    n_context: int = Field(5, description="Number of contexts to retrieve", ge=1, le=10)
 
 
 class Source(BaseModel):
@@ -84,31 +85,33 @@ class SearchResponse(BaseModel):
 # Routes
 @app.on_event("startup")
 async def startup_event():
-    """Initialiser le RAG engine au démarrage"""
+    """Initialize RAG engine on startup"""
     global rag_engine
 
-    logger.info("🚀 Démarrage de l'API Casper Learn IA...")
+    logger.info("🚀 Starting Casper Learn IA API...")
 
     try:
-        # Récupérer la clé API depuis l'environnement
+        # Load environment variables
+        from dotenv import load_dotenv
+        load_dotenv()
+
+        # Try Groq first (free and fast)
+        groq_key = os.getenv("GROQ_API_KEY")
         openai_key = os.getenv("OPENAI_API_KEY")
+        use_groq = os.getenv("USE_GROQ", "true").lower() == "true"
 
-        if not openai_key:
-            logger.warning("⚠️ OPENAI_API_KEY non définie - utiliser .env")
-            # Essayer de charger depuis .env
-            from dotenv import load_dotenv
-            load_dotenv()
-            openai_key = os.getenv("OPENAI_API_KEY")
-
-        if not openai_key:
-            raise ValueError("OPENAI_API_KEY requise dans les variables d'environnement")
-
-        rag_engine = CasperRAG(openai_api_key=openai_key)
-        logger.info("✅ RAG Engine initialisé avec succès")
+        if use_groq and groq_key:
+            rag_engine = CasperRAG(groq_api_key=groq_key, use_groq=True)
+            logger.info("✅ RAG Engine initialized with Groq API")
+        elif openai_key:
+            rag_engine = CasperRAG(openai_api_key=openai_key, use_groq=False)
+            logger.info("✅ RAG Engine initialized with OpenAI API")
+        else:
+            raise ValueError("No API key found. Set GROQ_API_KEY or OPENAI_API_KEY")
 
     except Exception as e:
-        logger.error(f"❌ Erreur initialisation RAG: {e}")
-        logger.warning("⚠️ API démarrée en mode dégradé (sans RAG)")
+        logger.error(f"❌ Error initializing RAG: {e}")
+        logger.warning("⚠️ API started in degraded mode (no RAG)")
 
 
 @app.get("/", response_model=HealthResponse)
@@ -153,7 +156,8 @@ async def ask_question(request: QuestionRequest):
 
         result = rag_engine.generate_response(
             question=request.question,
-            n_context=request.n_context
+            n_context=request.n_context,
+            language=request.language
         )
 
         return {
