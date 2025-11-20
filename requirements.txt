@@ -1,0 +1,31 @@
+# Backend Core
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+pydantic==2.5.3
+python-dotenv==1.0.0
+
+# LLM & AI
+langchain==0.1.4
+langchain-openai==0.0.5
+langchain-community==0.0.16
+openai==1.10.0
+
+# Vector Database
+chromadb==0.4.22
+sentence-transformers==2.3.1
+
+# Web Scraping
+beautifulsoup4==4.12.3
+requests==2.31.0
+selenium==4.17.2
+playwright==1.41.2
+
+# Document Processing
+pypdf==4.0.1
+markdown==3.5.2
+python-docx==1.1.0
+
+# Utils
+aiohttp==3.9.3
+httpx==0.26.0
+tenacity==8.2.3
