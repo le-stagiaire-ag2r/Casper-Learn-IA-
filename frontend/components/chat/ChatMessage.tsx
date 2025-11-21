@@ -51,11 +51,11 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             <div className="prose prose-sm dark:prose-invert max-w-none">
               <ReactMarkdown
                 components={{
-                  code({ node, inline, className, children, ...props }) {
+                  code(props) {
+                    const { children, className, ...rest } = props
                     const match = /language-(\w+)/.exec(className || '')
-                    return !inline && match ? (
+                    return match ? (
                       <SyntaxHighlighter
-                        {...props}
                         style={vscDarkPlus}
                         language={match[1]}
                         PreTag="div"
@@ -64,7 +64,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                         {String(children).replace(/\n$/, '')}
                       </SyntaxHighlighter>
                     ) : (
-                      <code {...props} className="bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">
+                      <code {...rest} className="bg-gray-200 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">
                         {children}
                       </code>
                     )
