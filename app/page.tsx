@@ -47,27 +47,42 @@ export default function Home() {
           </Link>
         </div>
 
-        {/* Topics Preview */}
-        <div className="pt-12 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-          <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-            <div className="text-3xl mb-2">📚</div>
-            <div className="font-semibold text-white">Casper Basics</div>
-            <div className="text-gray-400 text-xs mt-1">Highway, CSPR, Wasm</div>
-          </div>
-          <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-            <div className="text-3xl mb-2">⚙️</div>
-            <div className="font-semibold text-white">Smart Contracts</div>
-            <div className="text-gray-400 text-xs mt-1">Rust, URefs, Gas</div>
-          </div>
-          <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-            <div className="text-3xl mb-2">🪙</div>
-            <div className="font-semibold text-white">Tokens & NFTs</div>
-            <div className="text-gray-400 text-xs mt-1">CEP-18, CEP-78</div>
-          </div>
-          <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
-            <div className="text-3xl mb-2">🔒</div>
-            <div className="font-semibold text-white">Staking</div>
-            <div className="text-gray-400 text-xs mt-1">Validators, Rewards</div>
+        {/* Topics Cards - NOW CLICKABLE */}
+        <div className="pt-12">
+          <h3 className="text-xl font-semibold text-gray-300 mb-6">Choose Your Learning Path</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+            <Link
+              href="/module/casper-basics"
+              className="bg-gray-800/50 rounded-lg p-4 border border-gray-700 hover:border-casper-primary hover:scale-105 transition-all cursor-pointer group"
+            >
+              <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">📚</div>
+              <div className="font-semibold text-white">Casper Basics</div>
+              <div className="text-gray-400 text-xs mt-1">Highway, CSPR, Wasm</div>
+            </Link>
+            <Link
+              href="/module/smart-contracts"
+              className="bg-gray-800/50 rounded-lg p-4 border border-gray-700 hover:border-casper-primary hover:scale-105 transition-all cursor-pointer group"
+            >
+              <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">⚙️</div>
+              <div className="font-semibold text-white">Smart Contracts</div>
+              <div className="text-gray-400 text-xs mt-1">Rust, URefs, Gas</div>
+            </Link>
+            <Link
+              href="/module/tokens-nfts"
+              className="bg-gray-800/50 rounded-lg p-4 border border-gray-700 hover:border-casper-primary hover:scale-105 transition-all cursor-pointer group"
+            >
+              <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">🪙</div>
+              <div className="font-semibold text-white">Tokens & NFTs</div>
+              <div className="text-gray-400 text-xs mt-1">CEP-18, CEP-78</div>
+            </Link>
+            <Link
+              href="/module/staking"
+              className="bg-gray-800/50 rounded-lg p-4 border border-gray-700 hover:border-casper-primary hover:scale-105 transition-all cursor-pointer group"
+            >
+              <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">🔒</div>
+              <div className="font-semibold text-white">Staking</div>
+              <div className="text-gray-400 text-xs mt-1">Validators, Rewards</div>
+            </Link>
           </div>
         </div>
 
