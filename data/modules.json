@@ -12,7 +12,7 @@
         "description": "Découvrez les bases de Casper Network",
         "category": "Fundamentals",
         "difficulty": "beginner",
-        "estimatedTime": 5,
+        "estimatedTime": 10,
         "questions": [
           {
             "id": "q1",
@@ -24,7 +24,7 @@
               "Un exchange décentralisé"
             ],
             "correctAnswer": 1,
-            "explanation": "Casper est une blockchain Proof-of-Stake de couche 1 qui utilise le protocole de consensus Highway pour assurer sécurité et décentralisation.",
+            "explanation": "Casper est une blockchain Proof-of-Stake de couche 1 qui utilise le protocole de consensus Highway, un protocole CBC (Correct-by-Construction) Casper pour assurer sécurité et décentralisation.",
             "difficulty": "beginner"
           },
           {
@@ -37,47 +37,161 @@
               "DOT"
             ],
             "correctAnswer": 2,
-            "explanation": "CSPR est le token natif de Casper Network, utilisé pour les transactions, le staking et la gouvernance.",
+            "explanation": "CSPR est le token natif de Casper Network, utilisé pour payer les frais de transaction (gas), le staking, et la gouvernance du réseau.",
             "difficulty": "beginner"
           },
           {
             "id": "q3",
-            "question": "Quel est l'avantage principal du consensus Highway ?",
+            "question": "Quelle technologie Casper utilise-t-il pour exécuter les smart contracts ?",
             "options": [
-              "Transactions plus rapides uniquement",
-              "Finalité flexible et sécurité économique",
-              "Consommation d'énergie élevée",
-              "Limitation des validateurs"
+              "Ethereum Virtual Machine (EVM)",
+              "WebAssembly (Wasm)",
+              "Java Virtual Machine (JVM)",
+              "Python Interpreter"
             ],
             "correctAnswer": 1,
-            "explanation": "Le consensus Highway permet une finalité flexible, ce qui signifie que les utilisateurs peuvent choisir leur niveau de sécurité en fonction de leurs besoins.",
+            "explanation": "Casper utilise WebAssembly (Wasm) comme environnement d'exécution pour les smart contracts, offrant de meilleures performances et la possibilité d'utiliser plusieurs langages de programmation.",
             "difficulty": "beginner"
           },
           {
             "id": "q4",
-            "question": "Casper permet-il les upgrades sans fork ?",
+            "question": "Qu'est-ce qu'un 'deploy' dans Casper ?",
             "options": [
-              "Non, il faut toujours un hard fork",
-              "Oui, grâce à son architecture modulaire",
-              "Seulement pour les smart contracts",
-              "Aucune upgrade n'est possible"
+              "Un type de smart contract",
+              "Une transaction ou exécution de code sur la blockchain",
+              "Un validateur du réseau",
+              "Un wallet Casper"
             ],
             "correctAnswer": 1,
-            "explanation": "Casper a été conçu avec une architecture modulaire permettant des upgrades sans nécessiter de hard fork, facilitant l'évolution du réseau.",
+            "explanation": "Dans Casper, un 'deploy' est l'unité de base d'exécution qui peut contenir soit un transfert de tokens, soit l'exécution de smart contract code. C'est l'équivalent d'une transaction.",
             "difficulty": "beginner"
           },
           {
             "id": "q5",
-            "question": "Quelle est la principale différence entre Casper et Ethereum ?",
+            "question": "Quelle est la particularité du consensus Highway ?",
             "options": [
-              "Casper n'a pas de smart contracts",
-              "Casper utilise WebAssembly (Wasm) pour les smart contracts",
-              "Casper est centralisé",
-              "Casper n'utilise pas de cryptographie"
+              "Il consomme beaucoup d'énergie",
+              "Il offre une finalité flexible selon les besoins",
+              "Il limite le nombre de validateurs à 10",
+              "Il ne permet pas de transactions concurrentes"
             ],
             "correctAnswer": 1,
-            "explanation": "Casper utilise WebAssembly (Wasm) pour exécuter les smart contracts, offrant plus de flexibilité et de performance comparé à l'EVM d'Ethereum.",
+            "explanation": "Highway offre une finalité flexible : les utilisateurs peuvent choisir combien de temps attendre pour avoir plus de certitude qu'une transaction est définitive, balançant entre vitesse et sécurité selon leurs besoins.",
+            "difficulty": "intermediate"
+          },
+          {
+            "id": "q6",
+            "question": "Qu'est-ce qu'un 'era' dans Casper ?",
+            "options": [
+              "Un type de token",
+              "Une période de temps fixe utilisée pour le staking et les récompenses",
+              "Un smart contract spécial",
+              "Un wallet officiel"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Une 'era' est une période de temps fixe dans Casper (environ 2 heures) utilisée pour calculer les récompenses de staking, changer les validateurs actifs, et d'autres opérations périodiques du réseau.",
+            "difficulty": "intermediate"
+          },
+          {
+            "id": "q7",
+            "question": "Casper permet-il les upgrades du protocole sans fork ?",
+            "options": [
+              "Non, chaque upgrade nécessite un hard fork",
+              "Oui, grâce à son architecture modulaire et au système de versioning",
+              "Seulement pour les smart contracts, pas le protocole",
+              "Les upgrades ne sont pas possibles"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Casper a été conçu avec une architecture permettant des upgrades du protocole sans fork grâce à un système de versioning intégré, facilitant l'évolution continue du réseau.",
+            "difficulty": "intermediate"
+          },
+          {
+            "id": "q8",
+            "question": "Quel type de clés cryptographiques Casper supporte-t-il ?",
+            "options": [
+              "Seulement Ed25519",
+              "Seulement Secp256k1",
+              "Ed25519 et Secp256k1",
+              "Aucune, Casper n'utilise pas de cryptographie"
+            ],
+            "correctAnswer": 2,
+            "explanation": "Casper supporte à la fois les clés Ed25519 et Secp256k1, offrant une flexibilité pour les développeurs et permettant l'interopérabilité avec d'autres blockchains.",
+            "difficulty": "intermediate"
+          }
+        ]
+      },
+      {
+        "id": "accounts-keys",
+        "title": "Comptes et Clés",
+        "description": "Comprenez le système de comptes et de permissions de Casper",
+        "category": "Fundamentals",
+        "difficulty": "intermediate",
+        "estimatedTime": 8,
+        "questions": [
+          {
+            "id": "q1",
+            "question": "Qu'est-ce qu'un Account Hash dans Casper ?",
+            "options": [
+              "Le mot de passe du compte",
+              "Un identifiant unique dérivé de la clé publique",
+              "Le solde du compte",
+              "L'adresse email de l'utilisateur"
+            ],
+            "correctAnswer": 1,
+            "explanation": "L'Account Hash est un identifiant unique de 32 bytes dérivé de la clé publique du compte. Il sert d'adresse permanente pour le compte, indépendamment des clés associées.",
+            "difficulty": "intermediate"
+          },
+          {
+            "id": "q2",
+            "question": "Casper supporte-t-il les comptes multi-signatures ?",
+            "options": [
+              "Non, un seul signataire par compte",
+              "Oui, avec un système de poids et seuils configurables",
+              "Seulement pour les smart contracts",
+              "Oui, mais limité à 2 signataires maximum"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Casper offre un système de permissions avancé basé sur des poids. Chaque clé associée a un poids, et des seuils sont définis pour différentes actions (deployment, key management). Cela permet des configurations multi-sig flexibles.",
+            "difficulty": "intermediate"
+          },
+          {
+            "id": "q3",
+            "question": "Quelle est la différence entre 'deployment threshold' et 'key management threshold' ?",
+            "options": [
+              "Il n'y a pas de différence",
+              "Deployment pour exécuter des deploys, Key management pour modifier les clés du compte",
+              "Deployment pour les tokens, Key management pour les NFTs",
+              "Ce sont juste des noms différents pour la même chose"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Le 'deployment threshold' définit le poids total nécessaire pour exécuter des deploys (transactions). Le 'key management threshold' définit le poids nécessaire pour ajouter/retirer des clés du compte. On peut avoir des seuils différents pour plus de sécurité.",
+            "difficulty": "advanced"
+          },
+          {
+            "id": "q4",
+            "question": "Peut-on récupérer un compte Casper si on perd sa clé privée ?",
+            "options": [
+              "Oui, en contactant le support Casper",
+              "Oui, avec une phrase de récupération",
+              "Non, c'est impossible sans la clé privée (sauf si configuré en multi-sig)",
+              "Oui, automatiquement après 30 jours"
+            ],
+            "correctAnswer": 2,
+            "explanation": "Sans la clé privée, il est impossible de récupérer un compte Casper, SAUF si le compte a été configuré avec plusieurs clés (multi-sig) et que vous avez accès à suffisamment de clés pour atteindre le seuil. C'est pourquoi il est crucial de sauvegarder ses clés.",
             "difficulty": "beginner"
+          },
+          {
+            "id": "q5",
+            "question": "Qu'est-ce qu'une 'associated key' dans Casper ?",
+            "options": [
+              "Une clé USB pour sécuriser le wallet",
+              "Une clé publique associée au compte avec un poids spécifique",
+              "Un mot de passe secondaire",
+              "Une clé de chiffrement des données"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Une 'associated key' est une clé publique liée au compte avec un poids assigné. Un compte peut avoir plusieurs associated keys, permettant des configurations multi-signature sophistiquées.",
+            "difficulty": "intermediate"
           }
         ]
       }
@@ -96,72 +210,186 @@
         "description": "Apprenez les bases des smart contracts Casper",
         "category": "Development",
         "difficulty": "intermediate",
-        "estimatedTime": 8,
+        "estimatedTime": 10,
         "questions": [
           {
             "id": "q1",
-            "question": "Quel langage est principalement utilisé pour les smart contracts Casper ?",
+            "question": "Quel est le langage principal pour développer des smart contracts sur Casper ?",
             "options": [
               "Solidity",
               "Rust",
               "JavaScript",
-              "Python"
+              "Go"
             ],
             "correctAnswer": 1,
-            "explanation": "Rust est le langage principal pour développer des smart contracts sur Casper, offrant sécurité et performance.",
-            "difficulty": "intermediate"
+            "explanation": "Rust est le langage principal et recommandé pour développer des smart contracts sur Casper. Il compile vers WebAssembly et offre sécurité, performance et un écosystème robuste.",
+            "difficulty": "beginner"
           },
           {
             "id": "q2",
-            "question": "Qu'est-ce qu'un 'session code' dans Casper ?",
+            "question": "Qu'est-ce que le 'session code' dans Casper ?",
             "options": [
-              "Un type de smart contract",
-              "Code exécuté temporairement pour interagir avec des contrats",
+              "Le code source du smart contract",
+              "Code Wasm exécuté temporairement pour interagir avec des contrats",
               "Un fichier de configuration",
-              "Une méthode de consensus"
+              "Le code du consensus"
             ],
             "correctAnswer": 1,
-            "explanation": "Le session code est du code exécuté temporairement pour effectuer des opérations comme appeler des smart contracts ou transférer des tokens.",
+            "explanation": "Le session code est du code WebAssembly exécuté dans une session temporaire. Il est utilisé pour appeler des smart contracts, installer de nouveaux contrats, ou effectuer des transferts. Il ne persiste pas après l'exécution.",
             "difficulty": "intermediate"
           },
           {
             "id": "q3",
-            "question": "Comment sont stockés les smart contracts sur Casper ?",
+            "question": "Où sont stockés les smart contracts installés sur Casper ?",
             "options": [
-              "Dans un fichier local",
-              "Dans le Global State sous forme de contrats nommés",
-              "Dans une base de données centralisée",
-              "Ils ne sont pas stockés"
+              "Dans un serveur centralisé",
+              "Dans le Global State sous forme de contrats nommés ou hash",
+              "Uniquement en mémoire volatile",
+              "Sur IPFS"
             ],
             "correctAnswer": 1,
-            "explanation": "Les smart contracts sont stockés dans le Global State de Casper, accessibles via des clés nommées ou des hash.",
+            "explanation": "Les smart contracts sont stockés dans le Global State de Casper, accessible via des clés nommées (named keys) ou des hash. Ils persistent et peuvent être appelés par d'autres contrats ou session code.",
             "difficulty": "intermediate"
           },
           {
             "id": "q4",
-            "question": "Qu'est-ce que le 'gas' dans Casper ?",
+            "question": "Comment appelle-t-on les coûts d'exécution sur Casper ?",
             "options": [
-              "Un token secondaire",
-              "Le coût en CSPR pour exécuter des opérations",
-              "Une fonctionnalité de consensus",
-              "Un type de validateur"
+              "Fees",
+              "Gas (payé en CSPR)",
+              "Commissions",
+              "Taxes"
             ],
             "correctAnswer": 1,
-            "explanation": "Le gas représente le coût en CSPR nécessaire pour exécuter des opérations sur le réseau, similaire à Ethereum.",
+            "explanation": "Comme Ethereum, Casper utilise le concept de 'gas' pour mesurer le coût computationnel. Le gas est payé en CSPR et dépend de la complexité de l'opération exécutée.",
+            "difficulty": "beginner"
+          },
+          {
+            "id": "q5",
+            "question": "Les smart contracts Casper sont-ils upgradables ?",
+            "options": [
+              "Non, ils sont toujours immuables",
+              "Oui, via un système de versioning et de package hash",
+              "Seulement si approuvé par vote des validateurs",
+              "Seulement dans les 24h après déploiement"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Casper permet l'upgrade de smart contracts via un système de versioning. On peut déployer une nouvelle version du contrat et mettre à jour le package hash, permettant l'évolution des contrats tout en gardant une trace des versions précédentes.",
+            "difficulty": "intermediate"
+          },
+          {
+            "id": "q6",
+            "question": "Qu'est-ce qu'un 'entry point' dans un smart contract Casper ?",
+            "options": [
+              "La première ligne de code",
+              "Une fonction publique appelable depuis l'extérieur",
+              "Le point d'entrée du réseau",
+              "Une variable d'état"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Un entry point est une fonction définie dans un smart contract qui peut être appelée depuis l'extérieur (via session code ou autre contrat). C'est l'interface publique du contrat.",
+            "difficulty": "intermediate"
+          },
+          {
+            "id": "q7",
+            "question": "Quel est l'avantage de WebAssembly pour les smart contracts ?",
+            "options": [
+              "Uniquement plus rapide",
+              "Support de multiples langages (Rust, AssemblyScript, etc.) et meilleures performances",
+              "Plus simple à écrire",
+              "Consomme moins de mémoire uniquement"
+            ],
+            "correctAnswer": 1,
+            "explanation": "WebAssembly permet d'écrire des smart contracts dans plusieurs langages (Rust, AssemblyScript, potentiellement C/C++), offre de meilleures performances que les VMs traditionnelles, et est un standard web mature.",
+            "difficulty": "intermediate"
+          },
+          {
+            "id": "q8",
+            "question": "Comment un smart contract stocke-t-il ses données sur Casper ?",
+            "options": [
+              "Dans une base de données SQL",
+              "Dans le Global State via des URefs (Unforgeable References)",
+              "En mémoire RAM uniquement",
+              "Sur le disque dur local"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Les smart contracts utilisent des URefs (Unforgeable References) pour stocker et accéder aux données dans le Global State. Les URefs sont des pointeurs sécurisés qui garantissent que seul le détenteur peut lire/modifier les données.",
+            "difficulty": "advanced"
+          }
+        ]
+      },
+      {
+        "id": "contract-development",
+        "title": "Développement de Contrats",
+        "description": "Techniques avancées de développement",
+        "category": "Development",
+        "difficulty": "advanced",
+        "estimatedTime": 12,
+        "questions": [
+          {
+            "id": "q1",
+            "question": "Qu'est-ce qu'un URef dans Casper ?",
+            "options": [
+              "Un type de token",
+              "Une référence infalsifiable pour accéder aux données du Global State",
+              "Un validateur spécial",
+              "Un format de fichier"
+            ],
+            "correctAnswer": 1,
+            "explanation": "URef (Unforgeable Reference) est un pointeur cryptographiquement sécurisé vers des données dans le Global State. Chaque URef a des permissions (Read, Write, Add) qui contrôlent comment les données peuvent être accédées.",
+            "difficulty": "advanced"
+          },
+          {
+            "id": "q2",
+            "question": "Quelle est la différence entre 'contract' et 'session code' ?",
+            "options": [
+              "Aucune différence",
+              "Contract persiste dans le Global State, session code s'exécute temporairement",
+              "Contract est plus rapide",
+              "Session code coûte plus cher"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Un contract est installé et persiste dans le Global State (stockage permanent). Le session code s'exécute temporairement dans le contexte d'un deploy et n'est pas stocké après exécution. Session code est souvent utilisé pour installer/appeler des contracts.",
+            "difficulty": "advanced"
+          },
+          {
+            "id": "q3",
+            "question": "Comment passer des arguments à un smart contract lors de l'appel ?",
+            "options": [
+              "Via URL parameters",
+              "Via RuntimeArgs sérialisés en bytes",
+              "Dans un fichier JSON",
+              "Par email"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Les arguments sont passés via RuntimeArgs, une structure qui sérialise les données en bytes selon le format CLValue de Casper. Cela permet de passer différents types (U512, String, List, etc.) de manière type-safe.",
+            "difficulty": "advanced"
+          },
+          {
+            "id": "q4",
+            "question": "Qu'est-ce que le 'casper-contract' crate en Rust ?",
+            "options": [
+              "Un wallet Casper",
+              "Une bibliothèque pour écrire des smart contracts",
+              "Un explorateur de blocks",
+              "Un outil de minage"
+            ],
+            "correctAnswer": 1,
+            "explanation": "casper-contract est une bibliothèque Rust officielle qui fournit les API et types nécessaires pour écrire des smart contracts Casper. Elle inclut des fonctions pour accéder au Global State, gérer les URefs, etc.",
             "difficulty": "intermediate"
           },
           {
             "id": "q5",
-            "question": "Les smart contracts Casper peuvent-ils s'upgrader ?",
+            "question": "Comment gérer les erreurs dans un smart contract Casper ?",
             "options": [
-              "Non, ils sont immuables",
-              "Oui, via un système de versioning",
-              "Seulement avec l'accord des validateurs",
-              "Uniquement par l'équipe Casper"
+              "Avec try/catch JavaScript",
+              "Avec des codes d'erreur personnalisés (u16) et runtime::revert()",
+              "Les erreurs ne sont pas possibles",
+              "Automatiquement par le runtime"
             ],
             "correctAnswer": 1,
-            "explanation": "Casper permet l'upgrade de smart contracts via un système de versioning, permettant aux développeurs d'améliorer leurs contrats.",
-            "difficulty": "intermediate"
+            "explanation": "On définit des codes d'erreur personnalisés (enum de u16) et on utilise runtime::revert(error_code) pour annuler l'exécution et retourner l'erreur. Cela permet une gestion d'erreurs précise et gas-efficient.",
+            "difficulty": "advanced"
           }
         ]
       }
@@ -175,76 +403,177 @@
     "order": 3,
     "quizzes": [
       {
-        "id": "casper-tokens",
-        "title": "Tokens sur Casper",
-        "description": "Comprenez les standards de tokens Casper",
+        "id": "cep18-standard",
+        "title": "Standard CEP-18 (Tokens Fungibles)",
+        "description": "Maîtrisez le standard de tokens fungibles Casper",
         "category": "Tokens",
         "difficulty": "intermediate",
-        "estimatedTime": 7,
+        "estimatedTime": 10,
         "questions": [
           {
             "id": "q1",
-            "question": "Quel est le standard de token fungible sur Casper ?",
+            "question": "Quel est le standard pour les tokens fungibles sur Casper ?",
             "options": [
               "ERC-20",
               "CEP-18",
               "BEP-20",
-              "SPL Token"
+              "TRC-20"
             ],
             "correctAnswer": 1,
-            "explanation": "CEP-18 est le standard pour les tokens fungibles sur Casper, similaire à ERC-20 sur Ethereum.",
-            "difficulty": "intermediate"
+            "explanation": "CEP-18 est le standard Casper Enhancement Proposal pour les tokens fungibles, similaire à ERC-20 sur Ethereum mais adapté à l'architecture de Casper.",
+            "difficulty": "beginner"
           },
           {
             "id": "q2",
-            "question": "Quel standard utilise-t-on pour les NFTs sur Casper ?",
+            "question": "Qu'est-ce qu'une 'allowance' dans CEP-18 ?",
             "options": [
-              "ERC-721",
-              "CEP-78",
-              "BEP-721",
-              "TRC-721"
+              "Le solde du compte",
+              "La permission donnée à un tiers de dépenser des tokens",
+              "Les frais de transaction",
+              "Le nombre total de tokens"
             ],
             "correctAnswer": 1,
-            "explanation": "CEP-78 est le standard avancé pour les NFTs sur Casper, offrant plus de flexibilité que les standards traditionnels.",
+            "explanation": "L'allowance permet au propriétaire de tokens d'autoriser un smart contract ou un autre compte à dépenser un montant spécifique de ses tokens. C'est essentiel pour les DEX et applications DeFi.",
             "difficulty": "intermediate"
           },
           {
             "id": "q3",
-            "question": "Que permet le CEP-78 par rapport à l'ERC-721 ?",
+            "question": "Comment un contrat CEP-18 stocke-t-il les balances ?",
             "options": [
-              "Rien de différent",
-              "Métadonnées mutables, ownership flexible, et modes de minting variés",
-              "Seulement des NFTs simples",
-              "Des frais moins élevés"
+              "Dans une base de données SQL",
+              "Dans des dictionnaires (Dictionaries) du Global State",
+              "En mémoire RAM",
+              "Dans un fichier JSON"
             ],
             "correctAnswer": 1,
-            "explanation": "CEP-78 offre des fonctionnalités avancées comme les métadonnées mutables, différents modes d'ownership, et plusieurs options de minting.",
-            "difficulty": "intermediate"
+            "explanation": "CEP-18 utilise des Dictionaries (structure de données clé-valeur) dans le Global State pour stocker efficacement les balances de tous les détenteurs de tokens. Cela permet un accès O(1) aux balances.",
+            "difficulty": "advanced"
           },
           {
             "id": "q4",
-            "question": "Comment transférer un token CEP-18 ?",
+            "question": "Quelle fonction utilise-t-on pour transférer des tokens CEP-18 ?",
             "options": [
-              "Via une transaction Bitcoin",
-              "En appelant la méthode 'transfer' du contrat",
-              "Par email",
-              "Automatiquement sans action"
+              "send()",
+              "transfer(recipient, amount)",
+              "move()",
+              "pay()"
             ],
             "correctAnswer": 1,
-            "explanation": "Pour transférer un token CEP-18, on appelle la méthode 'transfer' du smart contract avec l'adresse du destinataire et le montant.",
+            "explanation": "La fonction transfer(recipient, amount) est utilisée pour transférer des tokens du compte appelant vers un destinataire. Elle vérifie le solde et met à jour les balances dans le Global State.",
+            "difficulty": "beginner"
+          },
+          {
+            "id": "q5",
+            "question": "Peut-on 'burn' (détruire) des tokens CEP-18 ?",
+            "options": [
+              "Non, c'est impossible",
+              "Oui, avec la fonction burn() si implémentée",
+              "Seulement par les validateurs",
+              "Automatiquement après 1 an"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Le standard CEP-18 peut inclure une fonction burn() optionnelle qui détruit des tokens en réduisant le total_supply. C'est utile pour les mécanismes déflationnistes ou le rachat de tokens.",
+            "difficulty": "intermediate"
+          },
+          {
+            "id": "q6",
+            "question": "Qu'est-ce que le 'total_supply' dans un token CEP-18 ?",
+            "options": [
+              "Le nombre de validateurs",
+              "Le nombre total de tokens en circulation",
+              "Le prix du token",
+              "Le nombre de holders"
+            ],
+            "correctAnswer": 1,
+            "explanation": "total_supply représente le nombre total de tokens qui existent. Il est défini lors du déploiement du contrat et peut éventuellement changer via des fonctions mint() ou burn().",
+            "difficulty": "beginner"
+          }
+        ]
+      },
+      {
+        "id": "cep78-standard",
+        "title": "Standard CEP-78 (NFTs)",
+        "description": "Comprenez le standard NFT avancé de Casper",
+        "category": "NFTs",
+        "difficulty": "advanced",
+        "estimatedTime": 12,
+        "questions": [
+          {
+            "id": "q1",
+            "question": "Quel est le standard pour les NFTs sur Casper ?",
+            "options": [
+              "ERC-721",
+              "CEP-78",
+              "ERC-1155",
+              "CEP-47"
+            ],
+            "correctAnswer": 1,
+            "explanation": "CEP-78 est le standard avancé et flexible pour les NFTs sur Casper. Il offre plus de fonctionnalités que ERC-721, incluant métadonnées mutables, différents modes d'ownership, et options de minting configurables.",
+            "difficulty": "beginner"
+          },
+          {
+            "id": "q2",
+            "question": "CEP-78 permet-il des métadonnées mutables ?",
+            "options": [
+              "Non, toujours immuables",
+              "Oui, configurable lors du déploiement",
+              "Seulement pour les images",
+              "Oui, mais seulement pendant 24h"
+            ],
+            "correctAnswer": 1,
+            "explanation": "CEP-78 offre l'option de métadonnées mutables (MetadataMutability), permettant de mettre à jour les métadonnées d'un NFT après minting. C'est configurable lors du déploiement du contrat (0=Immutable, 1=Mutable).",
+            "difficulty": "advanced"
+          },
+          {
+            "id": "q3",
+            "question": "Qu'est-ce que le 'OwnershipMode' dans CEP-78 ?",
+            "options": [
+              "Le prix du NFT",
+              "Comment la propriété est gérée (Transferable, Minter, Assigned)",
+              "La taille de l'image",
+              "Le nombre de NFTs"
+            ],
+            "correctAnswer": 1,
+            "explanation": "OwnershipMode définit qui peut posséder et transférer les NFTs: Transferable (échangeable librement), Minter (seul le créateur peut posséder), Assigned (assigné à un compte spécifique, non-transférable). Configurable au déploiement.",
+            "difficulty": "advanced"
+          },
+          {
+            "id": "q4",
+            "question": "CEP-78 supporte-t-il le 'burning' de NFTs ?",
+            "options": [
+              "Non, jamais",
+              "Oui, via la fonction burn()",
+              "Seulement après 1 an",
+              "Seulement par vote"
+            ],
+            "correctAnswer": 1,
+            "explanation": "CEP-78 inclut la fonction burn() permettant au propriétaire de détruire un NFT. Cela retire le NFT de la circulation et met à jour les registres d'ownership.",
             "difficulty": "intermediate"
           },
           {
             "id": "q5",
-            "question": "Qu'est-ce qu'un 'allowance' dans CEP-18 ?",
+            "question": "Quelle est la différence principale entre CEP-78 et ERC-721 ?",
             "options": [
-              "Le solde total du compte",
-              "La permission donnée à un tiers de dépenser des tokens",
-              "Les frais de transaction",
-              "Le nombre maximum de tokens"
+              "Aucune différence",
+              "CEP-78 offre plus de flexibilité: métadonnées mutables, modes d'ownership variés, whitelist optionnelle",
+              "CEP-78 est plus simple",
+              "ERC-721 est plus rapide"
             ],
             "correctAnswer": 1,
-            "explanation": "L'allowance permet à un propriétaire de tokens d'autoriser un tiers (comme un smart contract) à dépenser un montant spécifique de ses tokens.",
+            "explanation": "CEP-78 est beaucoup plus flexible et configurable que ERC-721. Il offre: métadonnées mutables, plusieurs modes d'ownership, whitelist de transfert, schema de métadonnées personnalisable, et bien plus d'options configurables.",
+            "difficulty": "advanced"
+          },
+          {
+            "id": "q6",
+            "question": "Comment sont stockées les métadonnées NFT dans CEP-78 ?",
+            "options": [
+              "Directement dans le smart contract",
+              "Via une URI pointant vers un JSON (souvent IPFS) ou on-chain",
+              "Dans une base de données",
+              "Par email"
+            ],
+            "correctAnswer": 1,
+            "explanation": "CEP-78 stocke une URI (comme ipfs://...) qui pointe vers un fichier JSON contenant les métadonnées du NFT. Les métadonnées peuvent aussi être stockées entièrement on-chain si le NFTMetadataKind est configuré en 'Raw'.",
             "difficulty": "intermediate"
           }
         ]
@@ -259,12 +588,12 @@
     "order": 4,
     "quizzes": [
       {
-        "id": "intro-staking",
-        "title": "Introduction au Staking",
+        "id": "staking-basics",
+        "title": "Bases du Staking",
         "description": "Apprenez comment fonctionne le staking sur Casper",
         "category": "Staking",
         "difficulty": "beginner",
-        "estimatedTime": 6,
+        "estimatedTime": 8,
         "questions": [
           {
             "id": "q1",
@@ -276,7 +605,7 @@
               "Créer des smart contracts"
             ],
             "correctAnswer": 1,
-            "explanation": "Le staking consiste à verrouiller des tokens CSPR pour participer à la sécurisation du réseau et recevoir des récompenses en retour.",
+            "explanation": "Le staking consiste à déléguer (ou verrouiller) des tokens CSPR à un validateur pour participer à la sécurisation du réseau via le consensus Proof-of-Stake. En retour, les stakers reçoivent des récompenses.",
             "difficulty": "beginner"
           },
           {
@@ -286,36 +615,36 @@
               "1 CSPR",
               "100 CSPR",
               "500 CSPR",
-              "Aucun minimum"
+              "10,000 CSPR"
             ],
             "correctAnswer": 2,
-            "explanation": "Le montant minimum pour déléguer sur Casper est de 500 CSPR, rendant le staking accessible à de nombreux utilisateurs.",
+            "explanation": "Le montant minimum pour déléguer sur Casper est de 500 CSPR. Cela rend le staking accessible à un large public tout en maintenant une barrière minimale pour éviter le spam.",
             "difficulty": "beginner"
           },
           {
             "id": "q3",
-            "question": "Combien de temps faut-il pour unstake des tokens ?",
+            "question": "Combien de temps faut-il pour 'unstake' (retirer) des tokens ?",
             "options": [
-              "Immédiat",
-              "24 heures",
+              "Instantané",
               "~7 eras (environ 14 heures)",
-              "30 jours"
+              "30 jours",
+              "90 jours"
             ],
-            "correctAnswer": 2,
-            "explanation": "Le processus d'unstaking prend environ 7 eras, soit approximativement 14 heures sur Casper.",
+            "correctAnswer": 1,
+            "explanation": "Le processus d'unstaking prend environ 7 eras, soit approximativement 14 heures sur Casper. Cette période permet au réseau de réorganiser les validateurs et maintenir la sécurité.",
             "difficulty": "beginner"
           },
           {
             "id": "q4",
             "question": "Qu'est-ce qu'un validateur sur Casper ?",
             "options": [
-              "Un utilisateur qui achète des tokens",
+              "Un type de smart contract",
               "Un nœud qui participe au consensus et valide les transactions",
-              "Un développeur de smart contracts",
-              "Un exchange de cryptomonnaie"
+              "Un exchange de cryptomonnaie",
+              "Un wallet spécial"
             ],
             "correctAnswer": 1,
-            "explanation": "Un validateur est un nœud qui participe au consensus Highway, valide les transactions et produit de nouveaux blocs.",
+            "explanation": "Un validateur est un nœud qui participe activement au consensus Highway, propose et valide des blocs, et sécurise le réseau. Les validateurs doivent staker un minimum de tokens et maintenir une infrastructure robuste.",
             "difficulty": "beginner"
           },
           {
@@ -328,8 +657,96 @@
               "100%"
             ],
             "correctAnswer": 1,
-            "explanation": "Les récompenses de staking sur Casper varient généralement entre 8% et 12% APY, selon les conditions du réseau.",
+            "explanation": "Les récompenses de staking sur Casper varient généralement entre 8% et 12% APY, selon les conditions du réseau, le nombre total de tokens stakés, et les performances du validateur choisi.",
             "difficulty": "beginner"
+          },
+          {
+            "id": "q6",
+            "question": "Peut-on perdre ses tokens stakés sur Casper ?",
+            "options": [
+              "Non, jamais",
+              "Oui, si le validateur est 'slashé' pour mauvais comportement",
+              "Oui, automatiquement après 1 an",
+              "Seulement en cas de hack"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Les tokens peuvent être 'slashés' (partiellement confisqués) si le validateur auquel on a délégué se comporte mal (équivocation, downtime excessif). C'est pourquoi il est important de choisir un validateur fiable.",
+            "difficulty": "intermediate"
+          }
+        ]
+      },
+      {
+        "id": "advanced-staking",
+        "title": "Staking Avancé",
+        "description": "Concepts avancés de validation et délégation",
+        "category": "Staking",
+        "difficulty": "advanced",
+        "estimatedTime": 10,
+        "questions": [
+          {
+            "id": "q1",
+            "question": "Qu'est-ce que le 'slashing' dans Casper ?",
+            "options": [
+              "Augmenter les récompenses",
+              "Pénalité appliquée aux validateurs pour mauvais comportement",
+              "Distribuer des tokens gratuits",
+              "Fermer le réseau"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Le slashing est une pénalité économique où une partie des tokens stakés d'un validateur est confisquée pour punir les comportements malveillants (équivocation, double-signing) ou négligents (downtime prolongé).",
+            "difficulty": "advanced"
+          },
+          {
+            "id": "q2",
+            "question": "Combien faut-il minimum staker pour devenir validateur sur Casper ?",
+            "options": [
+              "500 CSPR",
+              "10,000 CSPR",
+              "Il n'y a pas de minimum technique, mais compétition pour entrer dans le set actif",
+              "1,000,000 CSPR"
+            ],
+            "correctAnswer": 2,
+            "explanation": "Techniquement, il n'y a pas de minimum absolu, mais les validateurs sont sélectionnés par ordre de stake total. En pratique, il faut un montant compétitif (plusieurs millions de CSPR en self-stake + délégations) pour entrer dans le validator set actif.",
+            "difficulty": "advanced"
+          },
+          {
+            "id": "q3",
+            "question": "Qu'est-ce qu'une 'bid' dans le système de staking Casper ?",
+            "options": [
+              "Une offre d'achat de tokens",
+              "La déclaration d'un validateur de son stake et paramètres",
+              "Un type de smart contract",
+              "Une enchère pour des NFTs"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Une 'bid' est la soumission d'un validateur au système d'enchères de staking. Elle contient le montant staké, la commission du validateur, et les délégations reçues. Les bids avec le plus de stake total deviennent validateurs actifs.",
+            "difficulty": "advanced"
+          },
+          {
+            "id": "q4",
+            "question": "Comment sont calculées les récompenses dans Casper ?",
+            "options": [
+              "Aléatoirement",
+              "Proportionnellement au stake et à la participation au consensus",
+              "Également pour tous",
+              "Par vote"
+            ],
+            "correctAnswer": 1,
+            "explanation": "Les récompenses sont calculées par era proportionnellement au poids du stake et à la participation effective du validateur au consensus (proposition de blocs, votes). Plus un validateur est actif et fiable, plus ses récompenses sont élevées.",
+            "difficulty": "advanced"
+          },
+          {
+            "id": "q5",
+            "question": "Peut-on déléguer à plusieurs validateurs simultanément ?",
+            "options": [
+              "Non, un seul validateur par compte",
+              "Oui, on peut diviser son stake entre plusieurs validateurs",
+              "Seulement 2 validateurs maximum",
+              "Oui, mais cela réduit les récompenses"
+            ],
+            "correctAnswer": 1,
+            "explanation": "On peut déléguer son stake à plusieurs validateurs simultanément, répartissant ainsi le risque. C'est une bonne pratique pour diversifier et se protéger contre le slashing d'un validateur unique.",
+            "difficulty": "intermediate"
           }
         ]
       }
