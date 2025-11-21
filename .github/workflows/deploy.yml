@@ -24,20 +24,21 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: cd frontend && npm install
+        run: npm ci
 
       - name: Build
-        run: cd frontend && npm run build
+        run: npm run build
         env:
-          NEXT_PUBLIC_API_URL: ${{ secrets.API_URL }}
+          NODE_ENV: production
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: frontend/out
+          path: ./out
 
   deploy:
     environment:
