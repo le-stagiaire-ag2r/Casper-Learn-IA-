@@ -3,6 +3,9 @@
 import { useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { Quiz, Question } from '@/types';
+import { useLanguage } from '@/app/LanguageContext';
+import { useWallet } from '@/app/WalletContext';
+import { walletService } from '@/lib/casper/wallet';
 
 interface QuizContentProps {
   quizData: Quiz;
@@ -11,12 +14,16 @@ interface QuizContentProps {
 
 export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
   const router = useRouter();
+  const { t } = useLanguage();
+  const { connected, publicKey } = useWallet();
   const [quiz] = useState<Quiz>(quizData);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [answers, setAnswers] = useState<number[]>([]);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [badgeMinted, setBadgeMinted] = useState(false);
+  const [mintingBadge, setMintingBadge] = useState(false);
 
   const currentQuestion = quiz.questions[currentQuestionIndex];
   const isLastQuestion = currentQuestionIndex === quiz.questions.length - 1;
@@ -33,7 +40,7 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
     setAnswers([...answers, selectedAnswer]);
   };
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = async () => {
     if (isLastQuestion) {
       // Quiz completed
       const score = Math.round(
@@ -68,6 +75,20 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
 
       localStorage.setItem('casper-learning-progress', JSON.stringify(progressData));
       setIsCompleted(true);
+
+      // Mint NFT badge if wallet connected and score >= 80%
+      if (connected && publicKey && score >= 80) {
+        try {
+          setMintingBadge(true);
+          await walletService.mintBadgeNFT(publicKey, `${moduleId}-${quiz.id}`, score);
+          setBadgeMinted(true);
+          console.log('NFT Badge minted successfully! 🎖️');
+        } catch (error) {
+          console.error('Failed to mint badge:', error);
+        } finally {
+          setMintingBadge(false);
+        }
+      }
     } else {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswer(null);
@@ -91,18 +112,38 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
           <div className="text-6xl mb-4">
             {score >= 80 ? '🏆' : score >= 60 ? '🎯' : '📚'}
           </div>
-          <h2 className="text-3xl font-bold">Quiz Terminé !</h2>
+          <h2 className="text-3xl font-bold">{t('results.title')}</h2>
           <div className="text-5xl font-bold text-casper-primary">{score}%</div>
           <p className="text-xl text-gray-300">
-            {correctAnswers} / {quiz.questions.length} réponses correctes
+            {correctAnswers} / {quiz.questions.length} {t('results.correct')}
           </p>
+
+          {/* Badge minting status */}
+          {connected && score >= 80 && (
+            <div className="pt-2">
+              {mintingBadge ? (
+                <div className="flex items-center justify-center gap-2 text-blue-400">
+                  <div className="w-4 h-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
+                  <span>Minting NFT Badge...</span>
+                </div>
+              ) : badgeMinted ? (
+                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                  <p className="text-green-400 flex items-center justify-center gap-2">
+                    <span className="text-2xl">🎖️</span>
+                    <span>NFT Badge minted successfully!</span>
+                  </p>
+                </div>
+              ) : null}
+            </div>
+          )}
+
           <div className="pt-4">
             {score >= 80 ? (
-              <p className="text-green-400 text-lg">Excellent travail ! 🎉</p>
+              <p className="text-green-400 text-lg">{t('results.excellent')}</p>
             ) : score >= 60 ? (
-              <p className="text-yellow-400 text-lg">Bon travail ! Continuez comme ça ! 💪</p>
+              <p className="text-yellow-400 text-lg">{t('results.good')}</p>
             ) : (
-              <p className="text-orange-400 text-lg">Continuez à apprendre ! 📖</p>
+              <p className="text-orange-400 text-lg">{t('results.keep_learning')}</p>
             )}
           </div>
           <div className="flex gap-4 justify-center pt-4">
@@ -110,7 +151,7 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
               onClick={() => router.push(`/module/${moduleId}`)}
               className="px-6 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
             >
-              Retour au module
+              {t('results.back_module')}
             </button>
             <button
               onClick={() => {
@@ -119,10 +160,11 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
                 setShowExplanation(false);
                 setAnswers([]);
                 setIsCompleted(false);
+                setBadgeMinted(false);
               }}
               className="px-6 py-3 bg-casper-primary hover:bg-casper-primary/80 rounded-lg transition-colors"
             >
-              Recommencer
+              {t('results.retry')}
             </button>
           </div>
         </div>
@@ -139,10 +181,10 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
           className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
         >
           <span>←</span>
-          <span>Retour</span>
+          <span>{t('quiz.back')}</span>
         </button>
         <div className="text-sm text-gray-400">
-          Question {currentQuestionIndex + 1} / {quiz.questions.length}
+          {t('quiz.question')} {currentQuestionIndex + 1} / {quiz.questions.length}
         </div>
       </div>
 
@@ -164,9 +206,9 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
             currentQuestion.difficulty === 'intermediate' ? 'bg-yellow-500/20 text-yellow-400' :
             'bg-red-500/20 text-red-400'
           }`}>
-            {currentQuestion.difficulty === 'beginner' ? 'Débutant' :
-             currentQuestion.difficulty === 'intermediate' ? 'Intermédiaire' :
-             'Avancé'}
+            {currentQuestion.difficulty === 'beginner' ? t('module.beginner') :
+             currentQuestion.difficulty === 'intermediate' ? t('module.intermediate') :
+             t('module.advanced')}
           </span>
         </div>
 
@@ -220,7 +262,7 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
           <div className="mt-6 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg animate-slide-in">
             <div className="flex gap-2 mb-2">
               <span className="text-blue-400">💡</span>
-              <span className="font-semibold text-blue-400">Explication</span>
+              <span className="font-semibold text-blue-400">{t('quiz.explanation')}</span>
             </div>
             <p className="text-gray-300">{currentQuestion.explanation}</p>
           </div>
@@ -237,14 +279,14 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
                   : 'bg-casper-primary hover:bg-casper-primary/80 text-white'
               }`}
             >
-              Valider
+              {t('quiz.validate')}
             </button>
           ) : (
             <button
               onClick={handleNextQuestion}
               className="px-6 py-3 bg-casper-primary hover:bg-casper-primary/80 rounded-lg font-semibold transition-all"
             >
-              {isLastQuestion ? 'Voir les résultats' : 'Question suivante →'}
+              {isLastQuestion ? t('quiz.results') : t('quiz.next')}
             </button>
           )}
         </div>
