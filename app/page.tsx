@@ -1,13 +1,15 @@
 'use client';
 
 import Link from 'next/link';
+import Badges from '@/components/Badges';
 
 export default function Home() {
   return (
-    <div className="min-h-[80vh] flex items-center justify-center">
-      <div className="max-w-4xl mx-auto text-center space-y-8 px-4">
-        {/* Hero Section */}
-        <div className="space-y-6">
+    <div className="space-y-16 pb-12">
+      {/* Hero Section */}
+      <div className="min-h-[70vh] flex items-center justify-center">
+        <div className="max-w-4xl mx-auto text-center space-y-8 px-4">
+          <div className="space-y-6">
           <div className="text-7xl mb-6 animate-bounce">🎓</div>
           <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-casper-primary via-pink-500 to-purple-500 bg-clip-text text-transparent">
             Casper Interactive Learning
@@ -17,25 +19,25 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Features */}
-        <div className="flex flex-wrap justify-center gap-4 text-gray-400 text-sm md:text-base">
-          <div className="flex items-center gap-2">
-            <span className="text-green-400">✓</span>
-            <span>50+ Questions</span>
+          {/* Features */}
+          <div className="flex flex-wrap justify-center gap-4 text-gray-400 text-sm md:text-base">
+            <div className="flex items-center gap-2">
+              <span className="text-green-400">✓</span>
+              <span>50+ Questions</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-400">✓</span>
+              <span>NFT Badges</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-400">✓</span>
+              <span>Instant Feedback</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-green-400">✓</span>
+              <span>Track Progress</span>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-green-400">✓</span>
-            <span>Instant Feedback</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-green-400">✓</span>
-            <span>Track Progress</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-green-400">✓</span>
-            <span>3 Difficulty Levels</span>
-          </div>
-        </div>
 
         {/* CTA Button */}
         <div className="pt-8">
@@ -86,10 +88,16 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Powered by */}
-        <div className="pt-8 text-gray-500 text-sm">
-          Powered by official <span className="text-casper-primary font-semibold">Casper</span> documentation
+          {/* Powered by */}
+          <div className="pt-8 text-gray-500 text-sm">
+            Powered by official <span className="text-casper-primary font-semibold">Casper</span> documentation
+          </div>
         </div>
+      </div>
+
+      {/* Badges Section */}
+      <div className="max-w-6xl mx-auto px-4">
+        <Badges />
       </div>
     </div>
   );
