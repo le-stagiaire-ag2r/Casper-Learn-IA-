@@ -57,7 +57,8 @@ export default function Badges() {
   const getBadgeInfo = (badge: Badge) => {
     const module = modulesData.find(m => m.id === badge.moduleId);
     const quiz = module?.quizzes.find(q => q.id === badge.quizId);
-    return { module, quiz };
+    const badgeIcon = (quiz as any)?.badgeIcon || '🏆';
+    return { module, quiz, badgeIcon };
   };
 
   return (
@@ -70,7 +71,7 @@ export default function Badges() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {badges.map((badge, index) => {
-          const { module, quiz } = getBadgeInfo(badge);
+          const { module, quiz, badgeIcon } = getBadgeInfo(badge);
 
           return (
             <div
@@ -78,7 +79,7 @@ export default function Badges() {
               className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-gray-700 hover:border-casper-primary transition-all hover:scale-105"
             >
               <div className="text-center mb-4">
-                <div className="text-5xl mb-2">🏆</div>
+                <div className="text-5xl mb-2">{badgeIcon}</div>
                 <div className="text-3xl font-bold text-casper-primary">{badge.score}%</div>
               </div>
 

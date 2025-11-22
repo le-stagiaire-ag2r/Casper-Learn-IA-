@@ -105,12 +105,13 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
   if (isCompleted) {
     const score = calculateScore();
     const correctAnswers = answers.filter((a, i) => a === quiz.questions[i].correctAnswer).length;
+    const badgeIcon = (quiz as any).badgeIcon || '🏆';
 
     return (
       <div className="max-w-2xl mx-auto">
         <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-8 border border-gray-700 text-center space-y-6">
           <div className="text-6xl mb-4">
-            {score >= 80 ? '🏆' : score >= 60 ? '🎯' : '📚'}
+            {score >= 80 ? badgeIcon : score >= 60 ? '🎯' : '📚'}
           </div>
           <h2 className="text-3xl font-bold">{t('results.title')}</h2>
           <div className="text-5xl font-bold text-casper-primary">{score}%</div>
