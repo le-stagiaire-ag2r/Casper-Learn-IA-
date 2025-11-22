@@ -2,6 +2,67 @@
 
 All notable changes to Casper Interactive Learning will be documented in this file.
 
+## [1.1.0] - 2024-11-22
+
+### 🎖️ On-Chain NFT Badge System
+
+Major feature release adding blockchain integration with NFT badge rewards.
+
+#### ✨ New Features
+
+**NFT Badge System**
+- **Casper Wallet Integration** - Full Casper Signer wallet connection
+- **Real-time CSPR Balance** - Display user's balance directly in the app header
+- **Automatic NFT Minting** - Mint badges when completing quizzes with 80%+ score
+- **8 Unique Badge Icons** - Each quiz has its own collectible emoji:
+  - 🌟 Introduction to Casper
+  - 🔑 Accounts and Keys
+  - ⚙️ Introduction to Smart Contracts
+  - 💻 Contract Development
+  - 🪙 CEP-18 Standard (Fungible Tokens)
+  - 🎨 CEP-78 Standard (NFTs)
+  - 🔒 Staking Basics
+  - 💎 Advanced Staking
+- **Badge Gallery** - New homepage section displaying earned NFT badges
+- **Minting Status** - Visual feedback showing badge minting progress
+- **Testnet Integration** - Connected to Casper Testnet (rpc.testnet.casperlabs.io)
+
+**UX Improvements**
+- **Randomized Answer Positions** - Fixed issue where 90% of answers were in position #2
+  - Now evenly distributed: 22% / 31% / 33% / 14%
+  - Makes quizzes genuinely educational and unpredictable
+- **Connect Wallet UI** - New header button with wallet state (connected/disconnected)
+- **Badge Preview** - Show unique icon on quiz completion screen
+
+#### 🛠️ Technical
+
+- Added `casper-js-sdk@2.15.4` for blockchain interaction
+- Created `lib/casper/wallet.ts` - CasperWalletService class
+- Created `app/WalletContext.tsx` - Global wallet state management
+- Created `components/Badges.tsx` - Badge gallery component
+- Updated `components/Header.tsx` - Wallet connection UI
+- Updated `components/QuizContent.tsx` - Badge minting trigger
+- Updated `data/modules.json` - Randomized answers + badge icons
+
+#### 🎨 UI/UX
+
+- Badge minting animation with spinner
+- Success confirmation message
+- Unique emoji per quiz (8 different icons)
+- Responsive badge gallery grid
+- Hover effects on badge cards
+- Empty states for no badges / wallet not connected
+
+#### 📝 Documentation
+
+- Updated README with NFT badge features
+- Added badge system table with meanings
+- Added blockchain integration section
+- Updated version to 1.1.0
+- Removed dev scripts from repository
+
+---
+
 ## [1.0.0] - 2024-11-21
 
 ### 🎉 Initial Release
