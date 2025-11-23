@@ -42,13 +42,17 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
 
   const handleNextQuestion = async () => {
     if (isLastQuestion) {
-      // Quiz completed
-      const score = Math.round(
-        ((answers.filter((a, i) => a === quiz.questions[i].correctAnswer).length +
-          (selectedAnswer === currentQuestion.correctAnswer ? 1 : 0)) /
-          quiz.questions.length) *
-          100
-      );
+      // Quiz completed - add last answer to the array
+      if (selectedAnswer === null) return; // Should never happen, but TypeScript check
+
+      const allAnswers = [...answers, selectedAnswer];
+
+      // Calculate score based on all answers
+      const correctCount = allAnswers.filter((answer, index) =>
+        answer === quiz.questions[index].correctAnswer
+      ).length;
+
+      const score = Math.round((correctCount / quiz.questions.length) * 100);
 
       // Save progress
       const progress = localStorage.getItem('casper-learning-progress');
@@ -64,7 +68,7 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
         quizId: quiz.id,
         score,
         completedAt: new Date().toISOString(),
-        answers: [...answers, selectedAnswer],
+        answers: allAnswers,
       };
 
       if (existingIndex >= 0) {
@@ -74,6 +78,9 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
       }
 
       localStorage.setItem('casper-learning-progress', JSON.stringify(progressData));
+
+      // Update answers state with all answers including the last one
+      setAnswers(allAnswers);
       setIsCompleted(true);
 
       // Mint NFT badge if wallet connected and score >= 80%
@@ -97,8 +104,8 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
   };
 
   const calculateScore = () => {
-    const correctAnswers = answers.filter((a, i) => a === quiz.questions[i].correctAnswer).length +
-      (selectedAnswer === currentQuestion.correctAnswer ? 1 : 0);
+    // answers already contains all answers including the last one when quiz is completed
+    const correctAnswers = answers.filter((a, i) => a === quiz.questions[i].correctAnswer).length;
     return Math.round((correctAnswers / quiz.questions.length) * 100);
   };
 
