@@ -42,13 +42,10 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
 
   const handleNextQuestion = async () => {
     if (isLastQuestion) {
-      // Quiz completed - add last answer to the array
-      if (selectedAnswer === null) return; // Should never happen, but TypeScript check
-
-      const allAnswers = [...answers, selectedAnswer];
+      // Quiz completed - answers already contains all responses (added in handleSubmitAnswer)
 
       // Calculate score based on all answers
-      const correctCount = allAnswers.filter((answer, index) =>
+      const correctCount = answers.filter((answer, index) =>
         answer === quiz.questions[index].correctAnswer
       ).length;
 
@@ -68,7 +65,7 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
         quizId: quiz.id,
         score,
         completedAt: new Date().toISOString(),
-        answers: allAnswers,
+        answers: answers,
       };
 
       if (existingIndex >= 0) {
@@ -78,9 +75,6 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
       }
 
       localStorage.setItem('casper-learning-progress', JSON.stringify(progressData));
-
-      // Update answers state with all answers including the last one
-      setAnswers(allAnswers);
       setIsCompleted(true);
 
       // Mint NFT badge if wallet connected and score >= 80%
