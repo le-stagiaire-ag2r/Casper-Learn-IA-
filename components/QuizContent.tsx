@@ -42,10 +42,10 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
 
   const handleNextQuestion = async () => {
     if (isLastQuestion) {
-      // Quiz completed - add last answer to the array
-      if (selectedAnswer === null) return; // Should never happen, but TypeScript check
+      // Quiz completed - need to include the last answer that's in selectedAnswer
+      // because setState is async and answers state might not be updated yet
 
-      const allAnswers = [...answers, selectedAnswer];
+      const allAnswers = [...answers, selectedAnswer!];
 
       // Calculate score based on all answers
       const correctCount = allAnswers.filter((answer, index) =>
@@ -79,7 +79,7 @@ export default function QuizContent({ quizData, moduleId }: QuizContentProps) {
 
       localStorage.setItem('casper-learning-progress', JSON.stringify(progressData));
 
-      // Update answers state with all answers including the last one
+      // Update answers state with complete answers array for results display
       setAnswers(allAnswers);
       setIsCompleted(true);
 
